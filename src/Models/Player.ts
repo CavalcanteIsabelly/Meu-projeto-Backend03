@@ -1,5 +1,6 @@
 // A palavra "class" define que estamos criando um molde.
 // A palavra "export" permite que esse arquivo seja usado por outros arquivos (como o app.ts).
+
 export class Player {
     public name: string; // O nome do jogador (texto)
     public health: number; // A saúde do jogador (número)
@@ -20,9 +21,22 @@ export class Player {
     }
 
     // Método que recebe o dano sofrido e atualiza a saúde
-    public takeDamage(amount: number): string {
-        this.health -= amount; // Reduz a saúde do jogador
+    public takehealth(health: number): string {
+        this.health += health; // Subtrai o dano da saúde atual
+        if (this.health >100) {
+            this.health = 100; // Garante que a saúde não fique negativa
+        }
+        return `${this.name} recebeu ${health} de vida e agora tem ${this.health} de saúde.`;
+    }
 
+    public takeDamage(amount: number): string {
+        this.health -= amount; // Subtrai o dano da saúde atual
+        // Garante que a saúde não fique negativa
+        if (this.health < 0) {
+            this.health = 0;
+        
+        }
+    
         if (this.health <= 0) {
             this.health = 0; // Garante que a saúde não fique negativa
             return `${this.name} foi derrotado!`;
@@ -31,3 +45,4 @@ export class Player {
         return `${this.name} recebeu ${amount} de dano e agora tem ${this.health} de saúde.`;
     }
 }
+    
